@@ -4,8 +4,8 @@
   "description": "The personal website of Gavin Plesko",
   "main": "app.js",
   "engines": {
-    "node": ">=10.15.3",
-    "npm": ">=6.4.1"
+    "node": ">=10.0.",
+    "npm": ">=6.0.0"
   },
   "scripts": {
     "test": "globalTests.js"
