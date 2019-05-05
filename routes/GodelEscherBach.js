@@ -18,15 +18,15 @@ var metaData = {
 
 
 // middleware that is specific to this router
-router.use((req, res, next)=> {
+router.use(function(req, res, next) {
   next();
 });
 // define the home page route
-router.get('/', (req, res)=> {
+router.get('/', function(req, res) {
   res.send('GEB');
 });
 // define the about route
-router.get('/about', (req, res)=> {
+router.get('/about', function(req, res) {
   res.send('About GEB');
 });
 

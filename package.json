@@ -17,6 +17,10 @@
     "webring",
     "resume"
   ],
+  "repository": {
+  "type" : "git",
+  "url" : "https://github.com/gtplesko/devBlog.git"
+  },
   "author": "Gavin Plesko",
   "license": "ISC"
 }

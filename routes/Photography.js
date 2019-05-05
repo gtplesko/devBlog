@@ -17,14 +17,14 @@ var metaData = {
 };
 
 
-router.use((req, res, next)=> {
+router.use(function(req, res, next) {
   next();
 });
 //uses the prefix added in app.js as a root.
-router.get('/', (req, res)=> {
+router.get('/', function(req, res) {
   res.send('Homepage here');
 });
-router.get('/about', (req, res)=> {
+router.get('/about', function(req, res) {
   res.send('Additional Route.');
 });
 
