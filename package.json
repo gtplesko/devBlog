@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "The personal website of Gavin Plesko",
   "main": "app.js",
+  "engines": {
+    "node": ">=10.15.3",
+    "npm": ">=6.4.1"
+  },
   "scripts": {
     "test": "globalTests.js"
   },
