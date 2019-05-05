@@ -1,0 +1,22 @@
+{
+  "name": "objdisdes",
+  "version": "0.0.1",
+  "description": "The personal website of Gavin Plesko",
+  "main": "app.js",
+  "scripts": {
+    "test": "globalTests.js"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "simplex-noise": "^2.4.0"
+  },
+  "keywords": [
+    "Personal",
+    "webring",
+    "resume"
+  ],
+  "author": "Gavin Plesko",
+  "license": "ISC"
+}

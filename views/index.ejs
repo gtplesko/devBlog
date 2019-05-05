@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <%include block/Header.ejs %>
+  </head>
+  <body>
+    <div class="jumbotron hero-image">
+      <div class="container" id="header-bar">
+        <h1>Object Disoriented Design</h1>
+        <hr/>
+        <%include block/HomeMessage.ejs%>
+      </div>
+    </div>
+  <div class="container search-bar fixed-top sticky-top">
+    <%include block/Search.ejs%>
+  </div>
+  <div class="container">
+    <div class="card-columns content">
+      <%console.log(Object.keys(posts)); Object.keys(posts).forEach(function(keys){ %>
+          <%- include('block/card', {post: posts[keys]}); %>
+      <% }); %>
+    </div>
+  </div>
+  </body>
+</html>

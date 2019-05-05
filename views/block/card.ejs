@@ -1,0 +1,20 @@
+<div data-sort="<%- new Date(post.date).getTime() %>" class="all-posts <%  for(i in post.keywords){ %>
+    <%- post.keywords[i] %>
+<% } %>">
+  <div class="card clickable" onclick="document.location.href = '<%- post.url %>';">
+    <div style="position:relative">
+    <img class="card-img-top" src="<%- post.imageSrc %>" alt="Card image">
+    <div class="card-img-overlay header-image-overlay">
+        <h2><%- post.title %></h2>
+    </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%- post.txt %></p>
+      <a href="<%- post.url %>" id="target" class="btn btn-info btn-block"><%- post.btnTxt %></a>
+
+    </div>
+    <div class="card-footer">
+      <p>Last updated: <%- post.date %></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.avaimg{
+  width: 30px;
+  height: auto;
+}
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 255, 0.1),rgba(50, 50, 50, 0.4)), url("/img/Cozy.jpg");
+
+  /* Set a specific height */
+  max-height: 60%;
+  min-height:400px;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  text-align: justify;
+  color: white;
+  border-radius: 0px;
+}
+.header-image-overlay {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(50, 50, 50, 0),rgba(50, 50, 50, 0.1));
+  color: white;
+}
+.header-image-overlay:hover {
+  background-image: linear-gradient(rgba(255, 200, 200, 0.3),rgba(50, 50, 50, 0),rgba(100, 100, 100, 0.3));
+}
+.card:hover{
+  border: 1px solid black;
+}
+.clickable{
+  cursor: pointer;
+}
+.search-bar {
+  padding: 10px 0px;
+  background-image: linear-gradient(rgba(255, 255, 255, 1),rgba(255, 240, 240, 1),rgba(220, 255, 255, 0.7),rgba(210, 255, 255, 0.6),rgba(200, 255, 255, 0));
+  border-radius: 0 0 15px 15px;
+}
+.search-bar .input-group{
+  border-bottom: 0.5px dotted black;
+}
+@media only screen and (max-width: 992px) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .card-columns {
+    column-count: 1;
+  }
+}

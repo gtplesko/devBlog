@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <%include block/Header.ejs %>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Object Disoriented Design</h1>
+      </div>
+    </div>
+  <div class="container">
+    <div class="clickable" onclick="document.location.href = '<%-post.url%>';">
+      <div style="position:relative">
+      <div class="">
+          <h2><%-post.title%></h2>
+      </div>
+      </div>
+      <div class="">
+        <p class=""><%-post.txt%></p>
+        <a href="<%-post.url%>" id="target" class="btn btn-info btn-block"><%-post.btnTxt%></a>
+
+      </div>
+      <div class="">
+        <p>Last updated: <%-post.date%></p>
+      </div>
+    </div>
+
+  </div>
+  </body>
+</html>
