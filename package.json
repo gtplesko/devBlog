@@ -4,7 +4,7 @@
   "description": "The personal website of Gavin Plesko",
   "main": "app.js",
   "engines": {
-    "node": ">=10.0.",
+    "node": "10.15.2",
     "npm": ">=6.0.0"
   },
   "scripts": {
