@@ -1,0 +1,27 @@
+
+<html>
+  <head>
+    <%include block/Header.ejs %>
+  </head>
+  <body>
+    <div class="jumbotron hero-image">
+      <div class="container" id="header-bar">
+        <h1>Object Disoriented Design</h1>
+        <hr/>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card-columns content">
+          <%Object.keys(photos).forEach(function(photo){ %>
+            <div data-sort="photo" class="all-posts">
+              <div class="card">
+                <img class="card-img-top" src="<%-photos[photo]%>" alt="Card image">
+                <div class="card-img-overlay">
+                </div>
+              </div>
+            </div>
+          <% }); %>
+      </div>
+    </div>
+  </body>
+</html>

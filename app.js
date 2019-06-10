@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 //Express will use the /public directory for css, js and images
 app.use(express.static(__dirname + '/public'));
 
-var posts ={};
+global.posts ={};
 
 
 
@@ -18,11 +18,14 @@ app.get('/', function(req, res) {
   res.render('index', {posts: posts});
 });
 
+var Article = require('./routes/Article');
+app.use('/Article', Article.router);
+
 var GodelEscherBach = require('./routes/GodelEscherBach');
 posts.GodelEscherBach = GodelEscherBach.metaData;
 app.use('/GodelEscherBach', GodelEscherBach.router);
 
-var SimplexNoise = require('./routes/SimplexNoise');
+var SimplexNoise = require('./routes/simplexNoise/SimplexNoise');
 posts.SimplexNoise = SimplexNoise.metaData;
 app.use('/SimplexNoise', SimplexNoise.router);
 
@@ -46,3 +49,8 @@ app.get('*', function(req, res) {
 app.listen(port, function() {
     console.log('Running on http://localhost:' + port);
 });
+
+
+module.exports = {
+  posts:posts
+};
