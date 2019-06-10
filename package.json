@@ -13,8 +13,7 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "request": "^2.88.0",
-    "simplex-noise": "^2.4.0"
+    "request": "^2.88.0"
   },
   "keywords": [
     "Personal",
@@ -22,8 +21,8 @@
     "resume"
   ],
   "repository": {
-  "type" : "git",
-  "url" : "https://github.com/gtplesko/devBlog.git"
+    "type": "git",
+    "url": "https://github.com/gtplesko/devBlog.git"
   },
   "author": "Gavin Plesko",
   "license": "ISC"

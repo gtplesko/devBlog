@@ -3,25 +3,30 @@
     <%include block/Header.ejs %>
   </head>
   <body>
-    <div class="jumbotron">
-      <div class="container">
+
+      <div class="jumbotron hero-image">
+        <div class="container" id="header-bar">
         <h1>Object Disoriented Design</h1>
       </div>
     </div>
   <div class="container">
-    <div class="clickable" onclick="document.location.href = '<%-post.url%>';">
-      <div style="position:relative">
-      <div class="">
-          <h2><%-post.title%></h2>
-      </div>
-      </div>
-      <div class="">
-        <p class=""><%-post.txt%></p>
-        <a href="<%-post.url%>" id="target" class="btn btn-info btn-block"><%-post.btnTxt%></a>
+          <h2 class="articleTitle"><%-post.title%></h2>
+
+      <div class="articleText">
+        <%-post.longTxt%>
 
       </div>
       <div class="">
         <p>Last updated: <%-post.date%></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3>Read more . . . </h3>
+      <div class="card-columns content">
+        <%console.log(Object.keys(posts)); Object.keys(posts).forEach(function(keys){ %>
+            <%- include('block/card', {post: posts[keys]}); %>
+        <% }); %>
       </div>
     </div>
 

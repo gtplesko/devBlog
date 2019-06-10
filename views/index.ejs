@@ -10,12 +10,12 @@
         <%include block/HomeMessage.ejs%>
       </div>
     </div>
-  <div class="container search-bar fixed-top sticky-top">
+  <!-- <div class="container search-bar fixed-top sticky-top">
     <%include block/Search.ejs%>
-  </div>
+  </div> -->
   <div class="container">
     <div class="card-columns content">
-      <%console.log(Object.keys(posts)); Object.keys(posts).forEach(function(keys){ %>
+      <%Object.keys(posts).forEach(function(keys){ %>
           <%- include('block/card', {post: posts[keys]}); %>
       <% }); %>
     </div>
