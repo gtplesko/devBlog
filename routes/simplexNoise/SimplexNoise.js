@@ -6,7 +6,7 @@ var router = express.Router();
 //     value3d = simplex.noise3D(x, y, z),
 //     value4d = simplex.noise4D(x, y, z, w);
 
-var lastUpdate = new Date('6/09/2019');
+var lastUpdate = new Date('6/10/2019');
 lastUpdate = new Date(lastUpdate.getTime() - (lastUpdate.getTimezoneOffset() * 60000 ))
                     .toISOString()
                     .split("T")[0];

@@ -1,69 +1,59 @@
-let counter = 0;
-
-let increment = 0.01;
-
-let zoff = 0;
-let xoff = 0;
-let yoff = 0;
-let lastVal = 0;
-let zoom = 2;
-
-let xNudge = 0;
-let yNudge = 0;
-let zNudge = 0;
-
-
-let noise;
 let canvas;
+let noise;
+let curZoom = 1;
+let curSeed = 1;
+let xOff = 0;
+let yOff = 0;
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight).canvas;
-  noise = new OpenSimplexNoise(lastVal);
+  noStroke();
+  noise = new gNoise(0, 2, 0.1, 0.1, 3, 0.5);
+  noise.processOctave(windowWidth, windowHeight, 255, curZoom, xOff, yOff);
 }
 function mouseDragged() {
-  xNudge+= ((pmouseX-mouseX)*increment)/20*zoom;
-  yNudge+= ((pmouseY-mouseY)*increment/20*zoom);
-  console.log((mouseX-pmouseX)*increment,(mouseY-pmouseY)*increment)
+  xOff += (pmouseX-mouseX)/noise.tileSize /curZoom/10;
+  yOff += (pmouseY-mouseY)/noise.tileSize /curZoom/10;
+  console.log(xOff,yOff);
+  noise.processOctave(windowWidth, windowHeight, 255, curZoom, xOff, yOff);
   return false;
 }
 
 function mouseWheel(event) {
-  print(zoom);
   //move the square according to the vertical scroll amount
-  zoom += event.delta/50;
+  curZoom -= event.delta/3;
+  if(curZoom >1 && curZoom < 16){
+    noise.octaves = Math.floor(curZoom);
+  }
+  else if(curZoom >= 16){
+    noise.octaves = 16;
+    curZoom = 16;
+  }
+  else{
+    noise.octaves = 1;
+    curZoom = 1;
+  }
+  noise.processOctave(windowWidth, windowHeight, 255, curZoom, xOff, yOff);
   //uncomment to block page scrolling
   return false;
 }
+
+function mousePressed() {
+  loop();
+}
+
+function mouseReleased() {
+  noLoop();
+}
+
+
 function draw() {
-  if(document.getElementById("seed").value!=lastVal){
-    noise = new OpenSimplexNoise(document.getElementById("seed").value);
-  }
-  // if(document.getElementById("zoom").value/200!=increment){
-  //   zoom = document.getElementById("zoom").value/200;
-  // }
-  // if(document.getElementById("xControl").value*increment!=xNudge){
-  //   xNudge = document.getElementById("xControl").value*increment;
-  // }
-  // if(document.getElementById("yControl").value*increment!=yNudge){
-  //   yNudge = document.getElementById("yControl").value*increment;
-  // }
+
   // if(document.getElementById("zControl").value*increment*0.01!=zNudge){
   //   zNudge = document.getElementById("zControl").value*increment*0.01;
+  //   noise.processOctave();
   // }
-
-  xoff = 0;
-  for (let x = 0; x*20 < width; x++) {
-    yoff = 0;
-    for (let y = 0; y*20 < height; y++) {
-      let n;
-      n = (noise.noise3D((xoff+xNudge), (yoff+yNudge), zoff+zNudge)+1)/2;
-      fill(n > 0.5 ? ground(n) : water(n));
-      square(x*20,y*20,20)
-      yoff += increment*zoom;
-    }
-    xoff += increment*zoom;
-  }
-  counter++;
 }
+
 function ground(num){
   if(num > 0.965 && num <= 1){
     return color(200/(num*2)+30, 200/(num*2)+30, 200/(num*2)+55)
@@ -77,4 +67,51 @@ function water(num){
 }
 function processWorld(){
 //todo use another z offset to populate world with stuff
+
+}
+class gNoise{
+  constructor(seed, oct, freq, amp, lac, pers){
+    this.seed = seed;
+    this.octaves = oct;
+    this.frequency = freq;
+    this.amplitude = amp;
+    this.lacunarity = lac;
+    this.persistance = pers;
+    this.noise = [];
+    for(let i = 0; i<16; i++ ){
+      this.noise[i] = new OpenSimplexNoise(seed+i);
+    }
+    this.tileSize = windowWidth/200; // reduce noise to generate
+  }
+  update(seed, oct, freq, amp, lac, pers){
+    this.seed = seed;
+    this.octaves = oct;
+    this.frequency = freq;
+    this.amplitude = amp;
+    this.lacunarity = lac;
+    this.persistance = pers;
+    this.noise = [];
+    for(let i = 0; i<16; i++ ){
+      this.noise[i] = new OpenSimplexNoise(seed+i);
+    }
+    this.tileSize = windowWidth/200; // reduce noise to generate
+  }
+  processOctave(w, h, d, zoom, xoff = 0, yoff=0){
+  zoom = zoom > 0 ? 1/zoom : 0.0001; //avoid dividing by zero
+    for (let x = 0; x*this.tileSize < w; x++) {
+      for (let y = 0; y*this.tileSize < h; y++) {
+        let n = 0;
+          for(let i = 0; i<this.octaves; i++){
+          // console.log(x,y)
+          n += this.noise[i].noise3D(
+            ((Math.pow(this.lacunarity, i))*xoff) + (x * this.frequency * (Math.pow(this.lacunarity, i))) * zoom,
+            ((Math.pow(this.lacunarity, i))*yoff) + (y * this.amplitude * (Math.pow(this.lacunarity, i))) * zoom,
+            d)* (Math.pow(this.persistance, i));
+        }
+        n=(n+1)/2;
+      fill(n > 0.5 ? ground(n) : water(n));
+      square(x*this.tileSize,y*this.tileSize,this.tileSize+0.5);
+      }
+    }
+  }
 }
